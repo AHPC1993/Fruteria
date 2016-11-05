@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <jsp:useBean id="beanUsuarios" scope="session" class="modelo.DAOUsuarios">
+         <jsp:useBean id="beanUsuarios" scope="request" class="modelo.DAOUsuarios">
             <jsp:setProperty name="beanUsuarios" property="*" />
             <%
                 //Se trae el valor que tiene el submit(botón) y dependiendo de ello se hace una funcionalidad.

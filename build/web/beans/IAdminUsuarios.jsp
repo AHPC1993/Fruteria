@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-        <link rel="stylesheet" href="/resources/demos/style.css">
         <script>
             $(function () {
                 $("#tabs").tabs({
@@ -54,8 +53,6 @@
         <div id="tabs-1">
             <center><article id="me" class="panel">
                     <form name="AddUsuarios" action="BeanAdminUsuarios.jsp" method="post" target="add" >        
-                        <div class="row">
-                            <div class="4u">
                                 <table>
                                     <tr>
                                         <td><B>Cédula</B><input id="cedula" name="cedula" type="text"  class="text" required="true" /> </td>
@@ -72,42 +69,27 @@
                                     </tr>
                                 </table>                                    
                                 <input  type="submit" name="submit" value="Registrarse"  class="button"/>
-                            </div>
-                        </div>
                     </form><iframe  name="add" width="250" height="250"></iframe>
                 </article>
             </center>
         </div>
         <div id="tabs-2">
             <form name="eliminarUser" action="BeanAdminUsuarios.jsp" method="post" target="eli">  
-                <div class="5grid">
-                    <div class="row">
-                        <div class="4u"> 
                             Ingrese la cédula del usuario a eliminar
                             <br>
                             <input id="codigoEliminar" name="codigoEliminar" type="text" title="cédula" class="text"  /> 
-                        </div> 
                         <br>
-                    </div>     
                     <input type="submit" name="submit" value="Eliminar" class="button" />
-                </div>
             </form><iframe  name="eli" width="250" height="250"> </iframe>
         </div>                                                                                                         
         <div id="tabs-3">
             <form name="modificarUser" action="FrmModificarUsuarios.jsp" target="mod" method="post">  
-                <div class="5grid">
-                    <div class="row">
-                        <div class="4u"> 
                             Ingrese el nombre de usuario que desea modificar
                             <br>
                             <input id="usuarioModificar" name="usuarioModificar" type="text" placeholder="Usuario" class="text" required="true" />                                
-                        </div> 
                         <br>                          
-                    </div>     
                     <input type="submit" name="submit" value="Buscar" class="button" />
-                </div>                
             </form><iframe  name="mod" width="1000" height="1000"> </iframe>
-
         </div>
         <div id="tabs-4">
             <%
@@ -127,6 +109,19 @@
                         out.println("</tr>");
                     }
                     out.println("</table>");
+                    // conexion.getCon().close();
+                } catch (Exception e) {
+                    out.println("Excepcion " + e);
+                }
+
+                try {
+                    controlador.Conexion conexion = new controlador.Conexion();
+                    ResultSet rs = conexion.buscar("select * from tbl_usuarios");
+                    out.println("<select>");
+                    while (rs.next()) {
+                        out.println(("<option value='" + rs.getObject("nombres") + "'>" + rs.getObject("nombres") + "</option>"));
+                    }
+                    out.println("</select>");
                     // conexion.getCon().close();
                 } catch (Exception e) {
                     out.println("Excepcion " + e);

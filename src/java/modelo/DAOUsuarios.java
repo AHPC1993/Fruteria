@@ -55,8 +55,8 @@ public class DAOUsuarios extends Usuarios {
     public boolean modificarUsuario() throws SQLException {
         conectar = new controlador.Conexion();
         if (verificarUsuario(super.getUsuario()) == true) {
-            String sql = "UPDATE  tbl_usuarios SET cedula='" + super.getCedula() + "', nombres='" + super.getNombre() + "', apellidos='" + super.getApellido() + "', direccion='" + super.getDireccion() + "', contrasena='" + super.getContrasena()  + "' WHERE usuario='" + super.getUsuario() + "'";
-            boolean resultado =  conectar.actualizar(sql);
+           final String SQL_ACTUALIZAR = "UPDATE  tbl_usuarios SET cedula='" + super.getCedula() + "', nombres='" + super.getNombre() + "', apellidos='" + super.getApellido() + "', direccion='" + super.getDireccion() + "', contrasena='" + super.getContrasena()  + "' WHERE usuario='" + super.getUsuario() + "'";
+            boolean resultado =  conectar.actualizar(SQL_ACTUALIZAR);
              conectar.cerrarConexion();
              return resultado;
         }

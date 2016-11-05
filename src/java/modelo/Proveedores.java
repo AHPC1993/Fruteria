@@ -10,26 +10,33 @@ package modelo;
  * @author 
  */
 public class Proveedores {
-    private int nit;
+    private String nit;
     private String nombre;
     private String direccion;
     private String telefono;
+    private String producto;
+    private int precio;
 
     public Proveedores() {
     }
 
-    public Proveedores(int nit, String nombre, String direccion, String telefono) {
+    public Proveedores(String nit, String nombre, String direccion, String telefono, String producto, int precio) {
         this.nit = nit;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.producto = producto;
+        this.precio = precio;
     }
 
-    public int getNit() {
+ 
+    
+
+    public String getNit() {
         return nit;
     }
 
-    public void setNit(int nit) {
+    public void setNit(String nit) {
         this.nit = nit;
     }
 
@@ -55,6 +62,22 @@ public class Proveedores {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+
+    public void setProducto(String producto) {
+        this.producto = producto;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
     
     

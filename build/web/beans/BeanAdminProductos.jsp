@@ -12,28 +12,26 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <jsp:useBean id="beanUsuarios" scope="request" class="modelo.DAOUsuarios">
-            <jsp:setProperty name="beanUsuarios" property="*" />
+         <jsp:useBean id="beanProductos" scope="request" class="modelo.DAOProductos">
+            <jsp:setProperty name="beanProductos" property="*" />
             <%
                 //Se trae el valor que tiene el submit(botón) y dependiendo de ello se hace una funcionalidad.
                 String valorSubmit = (String) request.getParameter("submit");
                 if (valorSubmit.equals("Registrarse")) { 
                     //Se cargan los atributos para un usuario.
-                    beanUsuarios.setCedula(request.getParameter("cedula"));
-                    beanUsuarios.setNombre(request.getParameter("nombres"));
-                    beanUsuarios.setApellido(request.getParameter("apellidos"));
-                    beanUsuarios.setDireccion(request.getParameter("direccion"));
-                    beanUsuarios.setUsuario(request.getParameter("usuarior"));
-                    beanUsuarios.setContrasena(request.getParameter("contrasenar"));
+                    beanProductos.setId(request.getParameter("id"));
+                    beanProductos.setNombre(request.getParameter("nombre"));
+                    beanProductos.setPrecio(Integer.parseInt(request.getParameter("precio")));
+                    beanProductos.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
                     //Se valida si el usuario fue insertado o no.
-                    if (beanUsuarios.insertarUsuario()== true) {
+                    if (beanProductos.insertarProducto()== true) {
                         out.println("Se ha registrado correctamente");
                     } else {
                         out.println("No se insertó el cliente");
                     }              
                 } else if (valorSubmit.equals("Eliminar")) {
-                    beanUsuarios.setCedula(request.getParameter("codigoEliminar")); 
-                    if (beanUsuarios.eliminarUsuario()) {
+                    beanProductos.setId(request.getParameter("codigoEliminar")); 
+                    if (beanProductos.eliminarProducto()) {
                         out.print("Se ha Eliminado correctamente");
                     } else {
                         out.print("No se pudo eliminar");
@@ -41,22 +39,19 @@
                 }
                     else if (valorSubmit.equals("Buscar")) {
                     out.print("Se entró a Buscar");                  
-                    beanUsuarios.setCedula(request.getParameter("codigoModificar"));
+                    beanProductos.setId(request.getParameter("codigoModificar"));
                 } 
                 else if (valorSubmit.equals("Modificar")) {
-                    beanUsuarios.setCedula(request.getParameter("cedulaMod"));
-                    beanUsuarios.setNombre(request.getParameter("nombresMod"));
-                    beanUsuarios.setApellido(request.getParameter("apellidosMod"));
-                    beanUsuarios.setDireccion(request.getParameter("direccionMod"));
-                    beanUsuarios.setUsuario(request.getParameter("usuarioMod"));
-                    beanUsuarios.setContrasena(request.getParameter("contrasenaMod"));                       
-                    if (beanUsuarios.modificarUsuario()) {
+                    beanProductos.setId(request.getParameter("cedulaMod"));
+                    beanProductos.setNombre(request.getParameter("nombreMod"));
+                    beanProductos.setPrecio(Integer.parseInt(request.getParameter("precioMod")));
+                    beanProductos.setCantidad(Integer.parseInt(request.getParameter("cantidadMod")));
+                    if (beanProductos.modificarProducto()) {
                         out.print("Se ha Modificado correctamente");
                     } else {
                         out.print("No se pudo Modificar");
                     }
-                } 
-//           
+                }           
 
             %>
            

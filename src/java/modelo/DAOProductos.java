@@ -54,8 +54,8 @@ public class DAOProductos extends Productos {
     public boolean modificarProducto() throws SQLException {
         conectar = new controlador.Conexion();
      
-            String sql = "UPDATE  tbl_productos SET nombre='" + super.getNombre()+ "', precio='" + super.getPrecio()+ "', cantidad='" + super.getCantidad() + "' WHERE id='" + super.getId()+ "'";
-            boolean resultado =  conectar.actualizar(sql);
+           final String SQL_ACTUALIZAR = "UPDATE  tbl_productos SET nombre='" + super.getNombre()+ "', precio='" + super.getPrecio()+ "', cantidad='" + super.getCantidad() + "' WHERE id='" + super.getId()+ "'";
+            boolean resultado =  conectar.actualizar(SQL_ACTUALIZAR);
              conectar.cerrarConexion();
              return resultado;
     }
@@ -66,7 +66,7 @@ public class DAOProductos extends Productos {
      *
      * @return
      */
-    public java.util.ArrayList consultarUsuariosArray() {
+    public java.util.ArrayList consultarProductosArray() {
         String sql = "SELECT * FROM tbl_productos WHERE id='" + super.getId()+ "'";
         java.util.ArrayList resultado = new java.util.ArrayList();
         java.sql.ResultSet rs = null;

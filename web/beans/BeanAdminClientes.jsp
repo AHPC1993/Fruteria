@@ -12,28 +12,27 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <jsp:useBean id="beanUsuarios" scope="request" class="modelo.DAOUsuarios">
-            <jsp:setProperty name="beanUsuarios" property="*" />
+         <jsp:useBean id="beanClientes" scope="request" class="modelo.DAOClientes">
+            <jsp:setProperty name="beanClientes" property="*" />
             <%
                 //Se trae el valor que tiene el submit(botón) y dependiendo de ello se hace una funcionalidad.
                 String valorSubmit = (String) request.getParameter("submit");
                 if (valorSubmit.equals("Registrarse")) { 
                     //Se cargan los atributos para un usuario.
-                    beanUsuarios.setCedula(request.getParameter("cedula"));
-                    beanUsuarios.setNombre(request.getParameter("nombres"));
-                    beanUsuarios.setApellido(request.getParameter("apellidos"));
-                    beanUsuarios.setDireccion(request.getParameter("direccion"));
-                    beanUsuarios.setUsuario(request.getParameter("usuarior"));
-                    beanUsuarios.setContrasena(request.getParameter("contrasenar"));
+                    beanClientes.setCedula(request.getParameter("cedula"));
+                    beanClientes.setNombre(request.getParameter("nombres"));
+                    beanClientes.setApellido(request.getParameter("apellidos"));
+                    beanClientes.setDireccion(request.getParameter("direccion"));
+                    beanClientes.setTelefono(request.getParameter("telefono"));
                     //Se valida si el usuario fue insertado o no.
-                    if (beanUsuarios.insertarUsuario()== true) {
+                    if (beanClientes.insertarCliente()== true) {
                         out.println("Se ha registrado correctamente");
                     } else {
                         out.println("No se insertó el cliente");
                     }              
                 } else if (valorSubmit.equals("Eliminar")) {
-                    beanUsuarios.setCedula(request.getParameter("codigoEliminar")); 
-                    if (beanUsuarios.eliminarUsuario()) {
+                    beanClientes.setCedula(request.getParameter("codigoEliminar")); 
+                    if (beanClientes.eliminarCliente()) {
                         out.print("Se ha Eliminado correctamente");
                     } else {
                         out.print("No se pudo eliminar");
@@ -41,22 +40,20 @@
                 }
                     else if (valorSubmit.equals("Buscar")) {
                     out.print("Se entró a Buscar");                  
-                    beanUsuarios.setCedula(request.getParameter("codigoModificar"));
+                    beanClientes.setCedula(request.getParameter("codigoModificar"));
                 } 
                 else if (valorSubmit.equals("Modificar")) {
-                    beanUsuarios.setCedula(request.getParameter("cedulaMod"));
-                    beanUsuarios.setNombre(request.getParameter("nombresMod"));
-                    beanUsuarios.setApellido(request.getParameter("apellidosMod"));
-                    beanUsuarios.setDireccion(request.getParameter("direccionMod"));
-                    beanUsuarios.setUsuario(request.getParameter("usuarioMod"));
-                    beanUsuarios.setContrasena(request.getParameter("contrasenaMod"));                       
-                    if (beanUsuarios.modificarUsuario()) {
+                    beanClientes.setCedula(request.getParameter("cedulaMod"));
+                    beanClientes.setNombre(request.getParameter("nombresMod"));
+                    beanClientes.setApellido(request.getParameter("apellidosMod"));
+                    beanClientes.setDireccion(request.getParameter("direccionMod"));
+                    beanClientes.setTelefono(request.getParameter("telefonoMod"));
+                    if (beanClientes.modificarCliente()) {
                         out.print("Se ha Modificado correctamente");
                     } else {
                         out.print("No se pudo Modificar");
                     }
-                } 
-//           
+                }           
 
             %>
            

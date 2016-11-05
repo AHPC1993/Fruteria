@@ -54,8 +54,8 @@ public class DAOClientes extends Clientes {
      */
     public boolean modificarCliente() throws SQLException {
         conectar = new controlador.Conexion();     
-            String sql = "UPDATE  tbl_clientes SET nombres='" + super.getNombre() + "', apellidos='" + super.getApellido() + "', direccion='" + super.getDireccion() + "', telefono='" + super.getTelefono()+ "' WHERE cedula='" + super.getCedula()+ "'";
-            boolean resultado =  conectar.actualizar(sql);
+            final String SQL_ACTUALIZAR = "UPDATE  tbl_clientes SET nombres='" + super.getNombre() + "', apellidos='" + super.getApellido() + "', direccion='" + super.getDireccion() + "', telefono='" + super.getTelefono()+ "' WHERE cedula='" + super.getCedula()+ "'";
+            boolean resultado =  conectar.actualizar(SQL_ACTUALIZAR);
              conectar.cerrarConexion();
              return resultado;
     }
