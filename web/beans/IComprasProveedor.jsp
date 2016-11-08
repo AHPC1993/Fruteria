@@ -56,10 +56,10 @@
                     try {
                         controlador.Conexion conexion = new controlador.Conexion();
                         ResultSet rs = conexion.buscar("select nombre, producto, precio from tbl_proveedores");
-                        out.println("<select id='proveedores'>");
+                        out.println("<select id='proveedores' name='proveedores'>");
                         out.println("<optgroup label='Selecione un proovedor'>");
                         while (rs.next()) {
-                            out.println(("<option value='" + rs.getObject("nombre") + "'>" + rs.getObject("nombre") + " - " + rs.getObject("producto") + " - " + rs.getObject("precio") + "</option>"));
+                            out.println(("<option value='" + rs.getObject("producto") + "'>" + rs.getObject("nombre") + " - " + rs.getObject("producto") + " - " + rs.getObject("precio") + "</option>"));
                         }
                         out.println("</optgroup>");
                         out.println("</select>");

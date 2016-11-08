@@ -5,28 +5,29 @@
  */
 package modelo;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
  *
- * @author allan
+ * @author
  */
-public class DAOProductos extends Productos {
+public class DAOVentas extends Ventas {
 
     controlador.Conexion conectar;
 
-    public DAOProductos() {
+    public DAOVentas() {
         conectar = new controlador.Conexion();
     }
 
     /**
-     * Método encargado de insertar productos en la base de datos del sistema.
+     * Método encargado de insertar una venta en la base de datos del sistema.
      *
      * @return
      */
-    public boolean insertarProducto() throws SQLException {
+    public boolean insertarVenta() throws SQLException {
         conectar = new controlador.Conexion();
-        final String SQL_INSERTAR = "INSERT INTO tbl_productos(id, nombre, precio, cantidad) VALUES (NULL,'" + super.getNombre() + "','" + super.getPrecio() + "','" + super.getCantidad() + "');";
+        final String SQL_INSERTAR = "INSERT INTO tbl_ventas(id, producto, cliente, cantidad, precio, total) VALUES (NULL,'" + super.getProducto() + "','" + super.getCliente() + "','" + super.getCantidad() + "','" + super.getPrecio() + "','" + super.getTotal() + "');";
         System.out.println(SQL_INSERTAR);
         boolean resultado = conectar.insertarSql(SQL_INSERTAR);
         conectar.cerrarConexion();
@@ -34,44 +35,33 @@ public class DAOProductos extends Productos {
     }
 
     /**
-     * Método encargado de eliminar un producto.
+     * Método encargado de devolver el precio de un producto específico.
      *
+     * @param producto
      * @return
      */
-    public boolean eliminarProducto() throws SQLException {
+    public int precioProducto(String producto) throws SQLException {
         conectar = new controlador.Conexion();
-        final String SQL_ELIMINAR = "DELETE FROM tbl_productos WHERE UPPER(id) = UPPER('" + super.getId() + "');";
-        boolean resultado = conectar.eliminar(SQL_ELIMINAR);
-        conectar.cerrarConexion();
-        return resultado;
+        final String SQL_PRECIO_PRODUCTO = "SELECT precio FROM tbl_productos where nombre='" + producto + "' LIMIT 1";
+        ResultSet resultado = null;
+        resultado = conectar.buscar(SQL_PRECIO_PRODUCTO);
+        if (resultado.next()) {
+            return Integer.parseInt(resultado.getString(1));
+        }
+        return 0;
     }
 
     /**
-     * Método encargado de modificar un producto.
-     *
-     * @return
-     */
-    public boolean modificarProducto() throws SQLException {
-        conectar = new controlador.Conexion();
-        final String SQL_ACTUALIZAR = "UPDATE  tbl_productos SET nombre='" + super.getNombre() + "', precio='" + super.getPrecio() + "', cantidad='" + super.getCantidad() + "' WHERE id='" + super.getId() + "'";
-
-        boolean resultado = conectar.actualizar(SQL_ACTUALIZAR);
-        conectar.cerrarConexion();
-        return resultado;
-    }
-
-    
-      /**
      * Método encargado de verificar que un producto exista.
      *
+     * @param producto
      * @return
      */
     public boolean verificarProducto(String producto) {
         final String SQL_VERIFICAR_PRODUCTO = "SELECT * FROM tbl_productos where nombre='" + producto + "'";
         return conectar.verificar(SQL_VERIFICAR_PRODUCTO);
     }
-    
-    
+
     /**
      * Método encargado de actualizar la cantidad existente de un producto a
      * través de la compra a un proveedor.
@@ -81,7 +71,7 @@ public class DAOProductos extends Productos {
     public boolean compraProductoProveedor(String nombre, String cantidad) throws SQLException {
         conectar = new controlador.Conexion();
 
-        final String SQL_ACTUALIZAR = "UPDATE  tbl_productos SET cantidad=cantidad+'"+ cantidad + "' WHERE nombre='" + nombre + "'";
+        final String SQL_ACTUALIZAR = "UPDATE  tbl_productos SET cantidad=cantidad+'" + cantidad + "' WHERE nombre='" + nombre + "'";
         boolean resultado = conectar.actualizar(SQL_ACTUALIZAR);
         conectar.cerrarConexion();
         return resultado;
@@ -92,8 +82,8 @@ public class DAOProductos extends Productos {
      *
      * @return
      */
-    public java.util.ArrayList consultarProductosArray() {
-        String sql = "SELECT * FROM tbl_productos WHERE id='" + super.getId() + "'";
+    public java.util.ArrayList consultarVentasArray() {
+        String sql = "SELECT * FROM tbl_ventas WHERE producto='" + super.getProducto() + "'";
         java.util.ArrayList resultado = new java.util.ArrayList();
         java.sql.ResultSet rs = null;
         try {

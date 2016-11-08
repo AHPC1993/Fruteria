@@ -1,9 +1,3 @@
-<%-- 
-    Document   : IAdminOperarios
-    Created on : 11/11/2014, 02:08:49 PM
-    Author     : allan
---%>
-
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,11 +7,12 @@
         <title>Adminitración de proveedores</title>
         <meta charset="utf-8">
         <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
-
         <!--Script necesarios para las tab-->
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
         <script>
             $(function () {
                 $("#tabs").tabs({
@@ -25,6 +20,7 @@
                 });
             });
         </script>
+
 
         <!--Utilizado para darle estilo a la tabla creada-->
         <style>

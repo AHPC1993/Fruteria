@@ -1,9 +1,3 @@
-<%-- 
-    Document   : BeanAdminOperarios
-    Created on : 11/11/2014, 02:09:05 PM
-    Author     : allan
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,50 +6,35 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="beanProveedores" scope="request" class="modelo.DAOProveedores">
-            <jsp:setProperty name="beanProveedores" property="*" />
+        <jsp:useBean id="beanComprarProductos" scope="request" class="modelo.DAOProductos">
+            <jsp:setProperty name="beanComprarProductos" property="*" />
             <%
-                out.println(request.getParameter("cantidadProducto"));
-                
+
                 //Se trae el valor que tiene el submit(botón) y dependiendo de ello se hace una funcionalidad.
                 String valorSubmit = (String) request.getParameter("submit");
-                if (valorSubmit.equals("Registrarse")) {
-                    //Se cargan los atributos para un usuario.
-                    beanProveedores.setNit(request.getParameter("nit"));
-                    beanProveedores.setNombre(request.getParameter("nombre"));
-                    beanProveedores.setDireccion(request.getParameter("direccion"));
-                    beanProveedores.setTelefono(request.getParameter("telefono"));
-                    beanProveedores.setProducto(request.getParameter("producto"));
-                    beanProveedores.setPrecio(Integer.parseInt(request.getParameter("precio")));
-                    //Se valida si el proveedor fue insertado o no.
-                    if (beanProveedores.insertarProveedor()== true) {
-                        out.println("Se ha registrado correctamente");
+                if (valorSubmit.equals("Comprar")) {
+                    //Se reciben los parámetros del nombre del producto que ofrece el proveedor y 
+                    //la cantidad del producto que se va a comprar.
+                    String nombreProducto = request.getParameter("proveedores");
+                    String cantidadProducto = request.getParameter("cantidadProducto");
+                    //Se verifica que el producto ya exista en la base de datos antes de actualizarlo
+                    if (beanComprarProductos.verificarProducto(nombreProducto)) {
+                        //Se valida que se actualice correctamente la cantidad.
+                        if (beanComprarProductos.compraProductoProveedor(nombreProducto, cantidadProducto)) {
+                            out.println("Se agregó la cantidad al producto existente correctamente ");
+                        }
+                        //Si el producto no existe, se inserta.
                     } else {
-                        out.println("No se insertó el cliente");
-                    }
-                } else if (valorSubmit.equals("Eliminar")) {
-                    beanProveedores.setNit(request.getParameter("codigoEliminar"));
-                    if (beanProveedores.eliminarProveedor()) {
-                        out.print("Se ha Eliminado correctamente");
-                    } else {
-                        out.print("No se pudo eliminar");
-                    }
-                } else if (valorSubmit.equals("Buscar")) {
-                    out.print("Se entró a Buscar");
-                    beanProveedores.setNit(request.getParameter("codigoModificar"));
-                } else if (valorSubmit.equals("Modificar")) {
-                    beanProveedores.setNit(request.getParameter("nitMod"));
-                    beanProveedores.setNombre(request.getParameter("nombreMod"));
-                    beanProveedores.setDireccion(request.getParameter("direccionMod"));
-                    beanProveedores.setTelefono(request.getParameter("telefonoMod"));
-                    beanProveedores.setProducto(request.getParameter("productoMod"));
-                    beanProveedores.setPrecio(Integer.parseInt(request.getParameter("precioMod")));
-                    if (beanProveedores.modificarProveedor()) {
-                        out.print("Se ha Modificado correctamente");
-                    } else {
-                        out.print("No se pudo Modificar");
+                        //Se guardan en el objeto productos el nombre y la cantidad
+                        beanComprarProductos.setNombre(nombreProducto);
+                        beanComprarProductos.setCantidad(Integer.parseInt(cantidadProducto));
+                        //Se inserta el producto y se valida que haya sido exitoso el proceso de insersión
+                        if (beanComprarProductos.insertarProducto()) {
+                            out.println("Se hizo la compra del producto correctamente ");
+                        }
                     }
                 }
+
 
             %>
 

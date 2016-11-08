@@ -1,8 +1,3 @@
-<%-- 
-    Document   : BeanLoginU
-    Created on : 11/10/2014, 08:55:33 PM
-    Author     : allan
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

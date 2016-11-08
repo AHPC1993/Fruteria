@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 3/11/2016, 10:16:58 AM
-    Author     : allan
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,7 +26,7 @@
                     <input type="text" placeholder="Usuario" id="usuario" name="usuario"/>
                     <input type="password" placeholder="Contraseña" id="contrasena"  name="contrasena"/>
                     <input  type="submit" name="submit" value="Login" class="button" />                
-                    <p class="message">No estás registrado? <a href="#">Registrarse</a></p>
+                 
                 </form>
             </div>
         </div>

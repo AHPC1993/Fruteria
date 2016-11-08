@@ -1,8 +1,3 @@
-<%-- 
-    Document   : BeanAdminOperarios
-    Created on : 11/11/2014, 02:09:05 PM
-    Author     : allan
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
