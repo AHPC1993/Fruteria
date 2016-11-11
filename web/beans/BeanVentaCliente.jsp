@@ -30,9 +30,10 @@
                     beanVenderProductos.setTotal(total);
                     //Se inserta la venta en la base de datos, si es correcta se muestra un mensaje al Usuario
                     if (beanVenderProductos.insertarVenta()) {
+                        if(beanVenderProductos.actualizarCantidadProducto(nombreProducto, cantidadProducto)){
                         out.println("Se realizó la venta correctamente. " + beanVenderProductos.getPrecio());
                         out.println(cantidadProducto);
-
+                        }
                     } else {
                         out.println("No Se realizó la venta correctamente. ");
 

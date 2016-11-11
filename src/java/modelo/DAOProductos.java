@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author allan
+ * @author 
  */
 public class DAOProductos extends Productos {
 

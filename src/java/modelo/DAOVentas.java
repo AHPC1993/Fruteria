@@ -33,6 +33,21 @@ public class DAOVentas extends Ventas {
         conectar.cerrarConexion();
         return resultado;
     }
+    
+        /**
+     * Método encargado de actualizar la cantidad de un producto al realizar una venta.
+     *
+     * @return
+     */
+    public boolean actualizarCantidadProducto(String nombreProducto, int cantidad) throws SQLException {
+        conectar = new controlador.Conexion();
+        final String SQL_ACTUALIZAR = "UPDATE  tbl_productos SET cantidad=cantidad-'" + cantidad + "' WHERE nombre='" + nombreProducto + "'";
+        System.out.println(SQL_ACTUALIZAR);
+        boolean resultado = conectar.insertarSql(SQL_ACTUALIZAR);
+        conectar.cerrarConexion();
+        return resultado;
+    }
+
 
     /**
      * Método encargado de devolver el precio de un producto específico.

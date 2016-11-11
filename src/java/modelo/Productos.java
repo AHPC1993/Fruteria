@@ -7,7 +7,7 @@ package modelo;
 
 /**
  *
- * @author allan
+ * @author 
  */
 public class Productos {
     private String id;
